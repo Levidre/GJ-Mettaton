@@ -1,0 +1,324 @@
+//---------------------------Communication--------------------------
+
+//I'm going to level with you, I don't really get a lot of what's going on in this .dic file. I'm pretty sure it's related to having ghosts talk to each other, or acknowledge each other's presence in some way, but I don't really know. If someone else knows more about this than I do, I'd love to hear about it, but for now, leave it all alone except for a few lines near the bottom.
+
+
+//communicate would be what says to Mettaton if she can communicate with a ghost or not, 0 is not, 1 is yes.
+
+//Only check Mettaton's status. If a ghost try to communicate, this would check her status to know if she can respond immediatly or not.
+OnCheckStatus
+{
+	SAVEVAR
+	communicate = 0
+	
+	if ASEARCH("Status",var.req.key) != -1
+	{
+		//If there is the word balloon is Mettaton's status, that means one is opened so that she is speaking with the user
+		currentstatus = var.req.value[ASEARCH("Status",var.req.key)]
+		if "balloon" _in_ currentstatus
+		{
+			communicate = 0
+		}
+		else
+		{
+			communicate = 1
+		}
+	}
+	else
+	{
+		//If the status isn't found, there isn't any balloon opened
+		communicate = 1
+	}
+}
+
+OnCommunicate
+ {
+	
+	if reference0 == "user" || reference0 == "User"
+ 	{
+		//---- 사용자로부터의 이야기에 대답
+ 		ReplyToUser
+	}
+ 	else
+	{
+ 		//---- 유령로부터의 이야기에 대답
+		//Check if Mettaton can respond
+		OnCheckStatus
+		--
+		//If yes, she would respond immediately
+ 		if communicate == 1
+		{
+			ghostcommunicated = IARRAY
+			ReplyToGhost
+		}
+		//If he was already speaking, it stocks the name of the ghost who communicated to respond to him later, when the balloon would be closed
+		else
+		{
+			
+			ghostcommunicated = IARRAY
+			ghostcommunicated[0] = "%(reference0)"
+			ghostcommunicated[1] = "%(reference1)"
+			
+			//This variable will be checked in OnBalloonClose and in OnBalloonBreak, so if a ghost tried to communicate, Mettaton would respond to him back when she finish to talk with the user.
+		}
+ 	}
+}
+
+ReplyToUser
+{
+	TalkToUser
+}
+
+
+//Again, I just have to guess at what's going on here since I've never really seen this in action. I think what's going on here is that there is a limited functionality for having ghosts communicate with each other, but I don't really know how you'd set it up or even see it happen. I believe ReplyToGhost would be in response to something the other ghost is saying, but I'm not sure. I wouldn't really mess very much with this - you may even just want to blank out the dialogue entirely. I've never personally seen it come up. I may experiment with this later and see if I can figure out more about it, but for now I wouldn't worry too much.
+
+//Mettaton responding to other ghosts
+ReplyToGhost
+{
+
+	if ARRAYSIZE(ghostcommunicated) < 1
+	{
+		res_reference0 = reference0
+	}
+	else
+	{
+		res_reference0 = "%(ghostcommunicated[0])"
+	}
+ 	if res_reference0 == "MVSans"
+	{}
+	elseif res_reference0 == "Ralsei"
+	{}
+	elseif res_reference0 == "Gaster"
+	{}
+	elseif res_reference0 == "Jockey"
+	{}
+	elseif res_reference0 == "Hunter and Smoker Beta" || res_reference0 == "Smoker"
+	{}
+	elseif res_reference0 == "Wheatley"
+	{}
+	elseif res_reference0 == "CheeryBot"
+	{}
+	elseif res_reference0 == "Azura"
+	{
+		
+		if reference1 == "* Hello.\e" || ghostcommunicated[1] == "* Hello.\e"
+		{
+			"HELLO AZURA.\e"
+		}
+		elseif reference1 == "* How are you ?\e" || ghostcommunicated[1] == "* How are you ?\e"
+		{
+			"FINE AND YOU ?\e"
+		}
+	}
+	else
+	{}
+	ghostcommunicated = IARRAY
+}
+
+
+
+//The function Mettaton would use to see if she can communicate with a ghost
+Select.azcheck
+{
+	//Here is the ghost we want to communicate with
+	ghosttocontact = "z_gaster"
+	communicate = 0
+	//To look into a file, Mettaton needs to open it and asks the OS a right on this file, here it's "r", for read, so Mettaton can read the file but couldn't write into it.
+	_f = FOPEN("..\..\..\%(ghosttocontact)\ghost\master\aya5_variable.cfg","r")
+	_text = 0
+	_i= 0
+	
+	//It would check all the variables of a ghost until the end (when _text = -1).
+	while _i <= 1000 && _text != -1
+	{
+		_i = _i + 1
+		// _text would be each line written in the file, it's here that you see the most the similarities between AYA and C, each line would guid to the next so FREAD just go to the next line.
+		//The path is a relativ one, it's here the path to any ghost's variables from Mettaton.
+		_text = FREAD("..\..\..\%(ghosttocontact)\ghost\master\aya5_variable.cfg")
+		//Checking if the ghost is currently speaking
+		if "var.req.value" _in_ _text
+		{
+			if "balloon" _in_ _text
+			{
+				communicate = 0
+			}
+			else
+			{
+				communicate = 1
+			}
+		}
+	}
+	
+	--
+	//After opening a file, we always must close it.
+	_f = FCLOSE("..\..\..\%(ghosttocontact)\ghost\master\aya5_variable.cfg")
+}
+
+//The second option to interact with a ghost, no need anymore.
+Onproperty
+{
+	message = reference0
+	--
+	//truc = _arg0
+	--
+/* 	if "balloon" _in_ truc
+	{
+		"I want %(truc)"
+	}
+	else
+	{
+		"I want %(truc)"
+		--
+		"I success"
+	}
+	-- */
+}
+
+
+//The functions to put in an other ghost to allow Mettaton to interact with him, no need of them anymore because it worked with the second function that has been replaced by the first.
+/* Onaproperty
+{
+	//the value of message means Mettaton want to interract.
+	message = reference0
+	--
+	//Onanother
+}
+Onanother
+{
+	//"It works"
+	--
+	//The problem of notify is getting the status of the ghost. For that, we need the sakura script, that notify keeps from work. That's why I'm using OnSecondChang to call it.
+	"\![get,property,Onproperty,currentghost.status]"
+}
+
+Onproperty
+{
+	message = reference0
+	--
+	//And finally we send to Mettaton the status of the other ghost. message is now the status of the other ghost.
+	"\![notifyother,Mettaton,Onproperty,%(message)]"
+	--
+	//Bringing back message to its default value to say it's over, so OnSecondChange wouldn't run all of this again.
+	message = 1
+}
+
+//Bit of code to put into OnSecondChange to notify Mettaton about if the ghost is ready or not.
+{	--
+	if message != 1
+	{
+		Onanother
+	}
+}
+ */
+ 
+OnOtherGhostTalk
+{
+	OnCheckStatus
+	--
+	if communicate == 1
+	{
+		case reference0
+		{
+			when "Dr. W.D. Gaster"
+			{
+				case reference3
+				{
+					when "OnSecondChange"
+					{
+						if "cigarettes " _in_ "%(reference4)" || " cigarettes" _in_ "%(reference4)"
+						{
+							"\w9\w9\w9\w9\w9\0\i[18]* I think Gaster want a cigarette.\e"
+							"\w9\w9\w9\w9\w9\0\i[18]* Poor Gaster,\w5 he wants a cigarette.\e"
+							"\w9\w9\w9\w9\w9\0\i[18]* I think you should give Gaster a cigarette.\e"
+							"\w9\w9\w9\w9\w9\0\i[18]* Gaster and his cigarette addiction.\e"
+						}
+					}
+					when "OnMouseDoubleClick"
+					{
+						if "Face" _in_ "%(reference4)"
+						{
+							if gpunched == 0
+							{
+								if issat == 1
+								{
+									OnChangePose
+								}
+								oncomputer = 0
+								isdrawing = 0
+								--
+								"\0\i[18]* NOOO !\i[0]\i[11]\i[39]\n\n[half]\w9\i[38]\w9* Huh\w9.\w9 I'm sorry,\w5 I shouldn't be concerned by what you do with Gaster.\w9\w9\i[18] But\i[0] I don't like violence.\w9\i[13] I know what he did and I don't approve but.\w1.\w1.\w4\i[18]\w1 t\i[0]\i[11]hat's not a reason to be mean with him.\w6\i[18]\w1 He\i[0]\i[12] just wants to save the ones he loves even if he isn't using the better way to do it. \w7\i[18] And I'm pretty sure that he loves the brothers even if he doesn't want to.\n\n[half]* Undertale is a game that incites to show mercy and I think Gaster deserves some mercy.\e"
+							}
+							else
+							{
+								"\0\i[18]\i[2001]\i[38]\f[italic,true]She doesn't seems comfortable.\i[2002]\f[italic,false]\e"
+								"\0\i[18]\i[2001]\i[38]\f[italic,true]You know she doesn't like violence when you punch him.\i[2002]\f[italic,false]\e"
+								"\0\i[18]\i[2001]\i[38]\f[italic,true]She is trying to look away.\i[2002]\f[italic,false]\e"
+							}
+							useraffection -= 1
+						}
+					}
+				}
+				
+			}
+			when "Jockey"
+			{
+				case reference3
+				{
+					when "OnMouseDoubleClick"
+					{
+						if "Face" _in_ "%(reference4)"
+						{
+							"\0* Why do you hurt her ?\w7 She is a very nice girl,\w5 she doesn't deserve violence.\e"
+						}
+						useraffection -= 1
+					}
+					when "OnSecondChange"
+					{
+						if "hug" _in_ "%(reference4)"
+						{
+							"\0\w9\w9\w9* Someone said hug ?\e"
+						}
+					}
+				}
+			}
+			when "Multiverse Sans"
+			{
+				if "knock knock" _in_ "%(reference4)"
+				{
+					"\0\w9\w9\w9* A knock knock joke ?\w7 Nice.\e"
+				}
+			}
+		}
+	}
+	communicate = 0
+}
+
+OnBalloonBreak
+{
+	communicate = 0
+	if ARRAYSIZE(ghostcommunicated) >= 2
+	{
+		
+		ReplyToGhost
+		
+	}
+}
+OnBalloonClose
+{
+	communicate = 0
+	if ARRAYSIZE(ghostcommunicated) >= 2
+	{
+		
+		ReplyToGhost
+	}
+}
+
+OnBalloonTimeout
+{
+	communicate = 0
+	if ARRAYSIZE(ghostcommunicated) >= 2
+	{
+		
+		ReplyToGhost
+	}
+}

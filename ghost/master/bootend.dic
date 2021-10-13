@@ -1,0 +1,510 @@
+﻿//---------------------------Booting and Ending--------------------------
+
+OnFirstBoot
+{
+ 	lastTalk = "" 
+	passmin = 0 
+	passsec = 0 
+	passhour = 0
+	cumuhour = 0
+	punched = 0
+ 	username         = "USER" 
+	stroke           = 0	
+ 	teachusername    = 0	
+	mikireflag       = 0	
+ 	aitalkinterval = 400 
+ 	birthdayprint = "????" 
+	talktime = "5 minutes" 
+	deleteshitai = "OFF" 
+	nowshell = "default_shell" 
+	playlistlist = IARRAY
+	songlist = IARRAY
+	isplayed = 0
+	muplayed = IARRAY
+	muhotkey = "OFF"
+	playlistload = 0
+	boarddisplayed = 0
+	playmode = "oneplaylist"
+	AllFilepath = IARRAY
+	keyplay = "p"
+	keystop = "s"
+	keynext = "n"
+	keyprev = "v"
+	keyclear = "c"
+	keyboard = "d"
+	paused = 0
+	displaytest = 0
+	knowcomputer = 0
+	
+	nbtracks = SAORI("saori\mcidonut.dll", "trackcount")
+	_i = 1
+	totalsongs = songlist
+	while _i <= nbtracks
+	{
+		totalsongs = (totalsongs,_i)
+		_i = _i + 1
+	}
+	
+	_i = FOPEN('saori\mciaudior.txt','w')
+	_i = FWRITE('saori\mciaudior.txt',"ogg.mode%(CHR(0x2c))mci")
+	_i = FCLOSE('saori\mciaudior.txt')
+
+	_i=UNLOADLIB('saori\mciaudior.dll')
+	_i=LOADLIB('saori\mciaudior.dll')
+	if reference0 == 0 
+ 	{
+		"\![enter,passivemode]\1\s[10]\0\s[0]Hello, and welcome to the Girl and Triangle Ghost Template. \w5My name is Girl, and that's Triangle over there.\w8\1\s[10]Sup. \w8\0\s[0]\n\n[half]If you downloaded this template, you are presumably interested in making a ghost. \w5This template has been designed to help you do that. \w5Please make sure to carefully read the included readme file. \w8\1\n\n[half]\s[10]Each of the .dic files you'll be editing has a lot of commentary to guide you.\w8\0\s[0]\n\n[half]In the future, you will be replacing this dialogue with the dialogue for your own ghost. \w5This is a good place to introduce your characters.\w8\1\n\n[half]\s[10]You can have your characters banter with each other and explain how the ghost works and how to access menus.\x\c\0\s[0]More details about dialogue coding will be in the walkthrough page.\w8\1\c\s[10]Now we're going to ask the user the first question about themselves, namely what pronouns they want us to use.\w8\0\s[0]\n\n[half]This will let us construct grammatically correct sentences referring to the user later.\x\w8\1\c\s[10]How should we refer to you, user?\n\n[half]/
+		\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n/
+		\![*]\q[She/Her/Hers,choicefirstsheher]\n/
+		\![*]\q[They/Them/Their,choicefirsttheythem]\e"
+ 	}
+	else
+ 	{
+ 		{
+ 		"\1\s[10]\0\s[0]This is the alternate OnFirstBoot dialogue.\e"
+		}
+ 	}
+}
+
+Select.choicefirsthehim
+{
+	presuffix = "masculine"
+	himher = "him"
+	heshe = "he"
+	hisher = "his"
+	--
+	NameInput
+}
+
+Select.choicefirstsheher
+{
+	presuffix = "feminine"
+	himher = "her"
+	heshe = "she"
+	hisher = "her"
+	--
+	NameInput
+}
+
+Select.choicefirsttheythem
+{
+	himher = "them"
+	heshe = "they"
+	hisher = "theirs"
+	--
+	NameInput
+}
+
+
+//--NameInput
+
+NameInput
+{
+	
+	"\0* WONDERFUL DARLING!\w8 NOW TELL ME WHAT IS YOUR NAME.\![leave,passivemode]\w8\![open,inputbox,OnNameTeach,-1]\e"
+}
+
+//--GetTimeSlot
+GetTimeSlot
+{
+	if hour >= 5 && hour <= 8
+	{
+		"earlymorning"
+	}
+	elseif hour >= 9 && hour <= 11
+	{
+		"morning"
+	}
+	elseif hour >= 12 && hour <= 14
+	{
+		"lunch"
+	}
+	elseif hour >= 15 && hour <= 17
+	{
+		"afternoon"
+	}
+	elseif hour >= 18 && hour <= 20
+	{
+		"evening"
+	}
+	elseif hour >= 21 && hour <= 24
+	{
+		"latenight"
+	}
+	else
+	{
+		"midnight"
+	}
+}
+
+
+//--GetDaySlot
+
+GetDaySlot
+{
+	"%(month)month %(day)day"
+}
+
+
+//-----------------------Normal Booting----------------------------
+
+OnBoot
+ {
+	lastTalk = "" //These values you may recognize from OnFirstBoot up there. Just pay them no mind.
+	passmin = 0
+	passsec = 0
+	passhour = 0
+	songpaused = ""
+	paused = 0
+	isplayed = 0
+	boarddisplayed = 0
+	muplayed = IARRAY
+	playlistload = 0
+	AllFilepath = IARRAY
+	nbtracks = SAORI("saori\mcidonut.dll", "trackcount")
+	_i = 1
+	totalsongs = songlist
+	while _i <= nbtracks
+	{
+		totalsongs = (totalsongs,_i)
+		_i = _i + 1
+	}
+	
+ 	"\0\s[0]\1\s[10]" 
+	--
+	dayslot = GetDaySlot
+	timeslot = GetTimeSlot 
+	if dayslot == userbirthday 
+	{
+			"\0\s[0]* IT SEEMS TO BE %(bornmonthprint) %(borndayprint)!\w8 ALL OF US AT MTT.CO WISH YOU A HAPPY BIRTHDAY, %(usernickname)!\e" 
+	}
+	
+	elseif dayslot == "6month 6day"
+	
+	{
+				"\0\s[0]* TODAY IS JUNE 6TH!\e"
+	}
+	elseif dayslot == "7month 4day"
+	{
+				"\0\s[0]* IS THERE ANY FIREWORKS OUTSIDE?\e"
+	}
+	else
+	{
+		"%(normalboottalk)" //If none of the days above match the current date, the ghost instead will go down to the next function, normalboottalk.
+	}
+}
+
+
+//--normalboottalk
+
+
+normalboottalk
+{
+	if weekday == 6 && hour >= 19 
+		{
+		"\0\s[0]* IT'S SATURDAY.\e"
+		}
+	elseif RAND(100) < 40 //What this does is choose a random number from 1-100, and then checks if that number is less than 40. If it's less than forty, then these dialogue pieces will occur. Remember, you can have multiple lines of dialogue within one set of brackets like this! You just need to make sure they're all enclosed in their own set of quotation marks.
+		{
+		"\0\s[0]* HELLO %(usernickname)!\e"
+	
+		"\0\s[0]* HI THERE %(usernickname).\e"
+	
+		"\0\s[0]* THANK YOU FOR TUNING IN %(usernickname)\e"
+		}
+ 	else
+ 	{	
+		if timeslot == "earlymorning" 
+		{
+		"\0\s[0]* UP BRIGHT AND EARLY FOR THE DAY ARE YOU?\e"
+		
+		"\0\s[0]* GOOD MORNING DARLING!\e"
+		}
+		elseif timeslot == "morning"
+		{
+		"\0\s[0]* GOOD MORNING DARLING!\e"
+		}
+		elseif timeslot == "lunch"
+		{
+		"\0\s[0]* HAVING A GOOD LUNCH THERE %(usernickname)?\e"
+		}
+		elseif timeslot == "afternoon"
+		{
+		"\0\s[0]* GOOD AFTERNOON, %(usernickname).\e"
+		}
+		elseif timeslot == "evening"
+		{
+ 		"\0\s[0]* A MIGHTY FINE EVENING THIS IS %(usernickname), TOO BAD THERE ISNT MUCH OF IT LEFT!\e"
+		}
+		elseif timeslot == "latenight"
+		{
+ 		"\0\s[0]IT'S A BIT LATE %(usernickname), \w8DO YOU PLAN TO SLEEP SOON?\e"
+		
+ 		"\0\s[0]IT'S GETTING QUITE LATE, ISN'T IT %(usernickname)?\e"
+		}
+		else
+		{
+		"\0\s[0]* YOU'VE INTERUPTED MY BEAUTY SLEEP!\e"
+		
+ 		"\0\s[0]* WHY, SHOW'S ENDED JUST A LITTLE BIT AGO,\w8 DONT YOU WANT TO SLEEP?\e"
+		}
+	}
+}
+
+
+//--OnClose
+
+OnClose
+ {
+ timeslot = GetTimeSlot 
+ --
+	if passmin >= 5
+		{
+			if RAND(100) < 40 
+			{
+				"\0\s[0]* GOODBYE, %(usernickname)!w8\w8"
+				
+				"\0\s[0]* TOODLES!!w8\w8"
+				
+				"\0\s[0]* HAVE A WONDERFUL DAY %(usernickname).w8\w8"
+			}
+			else
+			{
+			if timeslot == "earlymorning"
+				{
+					"\0\s[0]* MAKE SURE TO EAT YOUR VEGETABLES!\w8"
+					
+					"\0\s[0]* HAVE A NICE MORNING %(usernickname)!\w8\w8"
+				}
+			elseif timeslot == "morning"
+ 				{
+					"\0\s[0]* MAKE SURE TO EAT YOUR VEGETABLES!\w8"
+					
+					"\0\s[0]* HAVE A NICE MORNING %(usernickname)!\w8\w8"
+ 				}
+ 			elseif timeslot == "lunch"
+ 				{
+					"\0\s[0]* MAKE SURE TO EAT YOUR VEGETABLES!\w8"
+					
+ 					"\0\s[0]* HAVE A NICE LUNCH %(usernickname)!\w8"
+ 				}
+ 			elseif timeslot == "afternoon"
+ 				{
+ 					"\0\s[0]* HAVE A GOOD AFTERNOON %(usernickname)\w8"
+ 				}
+  			elseif timeslot == "evening"
+ 				{
+ 						if weekday == 6 
+ 						{
+ 							"\0\s[0]* HAVE A NICE SATURDAY %(usernickname)!\w8"
+ 						}
+ 						else
+ 						{
+ 							"\0\s[0]* HAVE A NICE EVENING %(usernickname).\w8"
+ 						}
+ 				}
+			elseif timeslot == "latenight"
+			 	{
+ 						if weekday == 6 //This is the same check as above to see if it's Saturday. Note that this doesn't have an else statement! Sometimes you can get away with that, but make sure you test thoroughly.
+						//Of course, you can also cut this check entirely if you want.
+ 						{
+ 							"\0\s[0]* IT'S TIME FOR MY BEAUTY REST!\w8"
+ 						}
+						
+ 						"\0\s[0]* SEE YOU TOMARROW, %(usernickname)!\w8"
+						
+						"\0\s[0]* HAVING A WONDERFUL REST %(usernickname).\w8"
+ 				}
+			else //like above, this is the midnight time slot since it's the last one left.
+ 				{
+ 						if weekday == 0 //checking if it's the middle of the night on Sunday
+ 						{
+ 							"\0\s[0]* HAVE A NICE SUNDAY NIGHT!\w8"
+ 						}
+						"\0\s[0]* TIME TO GO REST!\w8"
+						
+						"\0\s[0]* HAVE A GOOD NIGHT!\w8"
+				}
+			}
+				
+ 		}
+ 		
+ 		
+ 	else //This dialogue is for if they haven't been open for at least five minutes.
+ 	{
+ 		"\0\s[0]* REALLY? THAT SOON?\w8\w8"
+		
+ 		"\0\s[0]* IT SEEMS OUR SHOW HAS BEEN ABRUPTLY CUT SHORT!\w8\w8"
+ 	}
+ 	--
+	"\-\e" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it. Again, this will come up very rarely, so OnClose is an unusual case.
+ }
+
+
+ //-------------------------State Changing--------------------
+ //From here on, most of the dialogue will have to do with changing shells, ghosts, or states in some way.
+ 
+
+//--OnWindowStateRestore
+
+//This will run when you minimize them and then bring them back up. Replace with what you like.
+
+OnWindowStateRestore
+ {
+	"\0\s[0]* I'M BACK AGAIN!\e"
+}
+
+
+//--OnGhostChanging
+
+//This runs whenever you change or reload the ghost. You can change ghosts by going into the right click menu and going to Change Ghost, but this dialogue will also be called if you reload them using Utilities->Reload Ghost. Protip: If you are going to make a ghost, you will be reloading it A LOT.
+//Note: If you reload your ghost using the developer console instead of Utilities->Reload Ghost, it won't do this dialogue, so don't freak out if it doesn't show up.
+ 
+OnGhostChanging
+ {
+	if reference0 == "Girl" //Replace this with the name of your Sakura character as you put in install.txt or descript.txt. I set this up to use the full ghost's name with Hunter and Smoker but I forget exactly how I did it and I'm having trouble getting it to work again. I think I just didn't define the Sakura or Kero names in either descript.txt or install.txt. You can experiment with it yourself. Otherwise, leave it as your Sakura character's name.
+	{
+		"\0\s[0]* (Rebooting\w3.\w3.\w3.)\w8\w8\e"
+		//Replace this dialogue with whatever you like.
+	}
+ 	else //If you're switching to another Ghost.
+	{
+		"\0\s[0]* SEE YOU SOON %(usernickname)!\e"
+		
+		"\0\s[0]* HAVE FUN WITH %(refference0) %(usernickname)!\e"
+		
+		//Replace this dialogue with whatever you like. Notice the use of the %(reference0) envelope here? In OnGhostChanging, %(reference0) stores the name of the ghost being swapped to, so if you want to display what you're switching to, you can use %(reference0) as in this example. You don't have to use %(reference0) if you don't want to though.
+	}
+}
+
+
+//--OnGhostChanged
+
+//A sister to the above, this runs after the ghost has either reloaded itself, or when you switch from another ghost to this ghost.
+
+OnGhostChanged
+{
+	"\0\s[0]\1\s[10]" //this sets up their default poses
+	--
+	if reference0 == "Girl" //As above, this should be the name of your ghost as in install.txt or descript.txt.
+	{
+		"\0\s[0]* (He's rebooted.)\e"
+	}
+	else //If you're switching to them from another ghost...
+	{
+		"\0\s[0]I HOPE YOU HAD SOME FUN WITH %(refference0) %(usernickname)!\e"
+
+		//Again, %(reference0) in this function is the name of the ghost in question. As above, replace these two lines of dialogue what what'd be appropriate for your ghost.
+	}
+}
+
+
+//--OnShellChanging
+
+//This will run when you change your ghost's shell. If you don't have any other shells for your ghost, you can safely ignore this but don't delete it, you might as well keep it just in case. I probably won't add a different shell to this template because shells are a lot of work ugh, but for the sake of argument, let's pretend I did.
+
+OnShellChanging
+ {
+	if reference0 == "Hypothetical Shell that doesn't actually exist" //reference0 in OnShellChanging is the name of the shell you're swapping to. It should be defined in the descript.txt file in your shell folder. If you do have alternate shells, put in the right name here.
+	{
+	"\1\s[10]This dialogue is specifically for changing to this particular shell.\w8\0\w8\s[9]It totally exists.\w8\e"
+	//Then rewrite this line as appropriate.
+	}
+	else //if you don't have any specific dialogue for a specific shell
+	{
+	"\0\s[0]This dialogue is for changing shells.\w8\1\s[10]Sure is.\w8\e"
+	
+	"\1\s[10]This is another bit of dialogue for changing shells.\w8\0\s[8]I wonder how many people will actually have multiple shells?\e"
+	
+	//Rewrite these two lines as you need.
+	}
+ }
+ 
+ 
+ //--OnShellChanged
+ 
+ //The sister to the above, this is the dialogue after you've changed the shell.
+ 
+OnShellChanged
+ {
+ 	if reference0 == "GT Default Shell" //Again, this is the name of your shell as you put in the descript.txt file for that shell.
+ 	{
+ 		nowshell = "default_shell" //This is the folder name for your shell. Not the same as the above! 
+		
+ 		"\0\s[0]This dialogue is for switching to our default shell.\w8\1\s[18]No really, will anyone actually put in the work to use these functions?\w8\0\s[9]\n\n[half]Shh.\e"
+		//Replace dialogue as required.
+ 	}
+ 	elseif reference0 == "Hypothetical Shell that doesn't actually exist" //You can use as many elseifs for as many shells as you've got.
+ 	{
+ 		nowshell = "totallyrealshell"
+		
+ 		"\0\s[0]This dialogue is for switching to that hypothetical shell.\e"
+		
+ 		"\0\s[0]This is another bit of dialogue for switching to this hypothetical shell.\w8\1\s[18]Man if you actually use this, you should tell Zar, it'll blow her mind.\w8\0\n\n[half]\s[9]Shut up, we're not supposed to be in-character here.\e"
+		//Replace these bits with whatever you have in mind.
+ 	}
+ 	elseif reference0 == "Another totally real shell wow"
+ 	{
+ 		nowshell = "thiswouldbesomuchwork"
+		
+ 		"\1\s[10]This dialogue is after we've switched to another totally real shell.\e"
+		//Replace this as well.
+ 	}
+ 	else //For any shell without a specific name, or if you don't want to bother with individual responses to a shell.
+ 	{
+	"\0\s[0]This dialogue is after we've changed our shell to %(reference0).\w8\1\s[18]How many shells you got?\e"
+	
+	//Note the %(reference[0]) here! This time that should store the name of whatever shell you're switching to. To be honest, I have not experimented with this too much because making shells is a pain in the tuckus, but I'm going to take cindysuke's coding on faith and assume reference[0] is correct instead of reference0. Replace this bit of dialogue as you need.
+	}
+ }
+
+
+ //--OnDressupChanged
+ 
+ //This runs whenever you fiddle with their clothing via the dress-up option, if you've set any for your ghost. Honestly setting up clothing is a nightmare and I hate doing it, and if your ghost is going to be moving around substantially or at all, clothing won't stay in the right place anyway. So unless you're like a real expert on surfaces.txt coding and rigging up clothing for different poses or you're intense or dedicated enough to set up clothing in the right place for every pose you do, I would not bother with clothing for your ghost.
+ //HOWEVER I can't begrudge people who actually would put in that effort! And in that case, this function is for you. For now, I'll fill this in with some hypothetical items. Replace the dialogue below with whatever you need.
+
+OnDressupChanged
+{
+if reference0 == 0 //in OnDressupChanged, reference0 refers to the character, therefore this is evaluating which character in question is getting dressed up. 0 is the main character, as you know from the walkthrough by now.
+	{
+	if reference1 == "Clothing for Girl" //This is the name of the clothing item in the descript.txt file, I'm pretty sure.
+		{
+			if reference2 == 1 //This checks if you're putting it on.
+			{
+			"\0\s[0]You put my clothing item on me.\w8\1\s[19]lol like zar would ever bother with clothes for a ghost.\w8\0\s[9]\n\n[half]Shut up dude you're going to get us in trouble.\e"
+			}
+			else // This checks if you're taking it off.
+			{
+			"\0\s[0]You took the clothing item off.\e"
+			}
+		}		
+	}
+else //if reference0 isn't the main character, then it has to be the side character.
+	{
+	if reference1 == "some kind of clothing for triangle??" //The name of the item of clothing in the descript.txt file in your shell folder.
+		{
+			if reference2 == 1 //If you put it on
+			{
+			"\1\s[10]I'm wearing some kind of clothing.\w8\0\s[8]Maybe a hat?\e"
+			}
+			else //When you take it off.
+			{
+			"\1\s[10]You took off some kind of clothing.\e"
+			}
+		}
+	elseif reference1 == "i'm gonna say a propeller beanie" //As you've seen above, you can use elseifs to expand the list if you have more than one item.
+		{
+			if reference2 == 1 //if you're putting it on
+			{
+			"\1\s[10]You put a hat on me.\w8\0\s[6]lol.\w8\1\n\n[half]\s[11]Shaddap.\e"
+			}
+			else //when you take it off
+			{
+			"\1\s[10]You took off the hat.\e"
+			}
+		}
+	}
+}
+
+//If you are super dedicated to doing clothes, I'd recommend checking out some more in-depth FLELE tutorials for stuff about clothing until I muster up the energy to write a walkthrough page for it.

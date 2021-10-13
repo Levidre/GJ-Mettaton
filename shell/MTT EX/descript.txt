@@ -1,0 +1,97 @@
+﻿//There's a lot more going on in the descript.txt for a shell than for your ghost in general, as you can probably tell. I'll try to break it down.
+
+
+//Free or Bound
+//This determines whether or not your ghost can be moved freely around the desktop or if it's stuck to the bottom or top of the desktop.  The three values you can use here are free, bottom, and top. If your ghost is cut off at the chest or something, then you'd want it to be stuck to the bottom of the screen. Likewise if you're doing a hanging ghost, like Glados or Flowey or something, then you'd want to use top. Right now, this is set to free, meaning the ghost can be moved around freely by the user.
+
+seriko.alignmenttodesktop,free
+
+
+//General Information
+
+charset,UTF-8
+type,shell
+name,MTT EX
+craftman,Quonit, SirCrash, and Levi
+craftmanurl,http://www.ashido.com/ukagaka/walkthrough.html
+
+
+//Balloon Co-ordinates
+
+sakura.balloon.offsetx,0
+sakura.balloon.offsety,0
+kero.balloon.offsetx,0
+kero.balloon.offsety,0
+sakura.balloon.alignment,none
+kero.balloon.alignment,none
+
+
+//Shiori Icon
+//Don't mess with any of this.
+
+shiori.logo.filename,resources\niseshiori.png
+shiori.logo.x,16
+shiori.logo.y,256
+
+
+//Menu Font Color
+//Like it says, this is the font color for the right-click SSP menu. r g b stand for red blue green, adjust the values to get the color you want. This'll probably take some trial and error.
+
+menu.background.font.color.r,247
+menu.background.font.color.g,13
+menu.background.font.color.b,213
+
+
+//Menu Highlighted Text Color
+//See above
+
+menu.foreground.font.color.r,254
+menu.foreground.font.color.g,242
+menu.foreground.font.color.b,0
+
+
+//Menu Greyed Out Font Color
+//For options that aren't selectable for some reason.
+
+menu.disable.font.color.r,153
+menu.disable.font.color.g,153
+menu.disable.font.color.b,153
+
+
+//Menu Separate Color
+//The color of the tiny line that separates the sections on the menu.
+
+menu.separator.color.r,255
+menu.separator.color.g,255
+menu.separator.color.b,255
+
+
+//Menu Background Image Alignment
+
+menu.background.alignment,righttop
+menu.foreground.alignment,righttop
+menu.sidebar.alignment,bottom
+
+
+//Menu Background Image Location
+
+menu.background.bitmap.filename,menu_background.png
+menu.foreground.bitmap.filename,menu_foreground.png
+menu.sidebar.bitmap.filename,menu_sidebar.png
+
+
+//--Dress-up Code
+
+//sakura.bindgroup51.name,face,glasses
+
+//kero.bindgroup55.name,face,glasses
+//kero.bindgroup57.name,hair,hairpins
+
+
+//Dress-Up Menu Organization
+
+//sakura.menuitem0,51
+
+//kero.menuitem0,55
+//kero.menuitem1,-
+//kero.menuitem2,57

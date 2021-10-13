@@ -1,0 +1,548 @@
+
+kero.tooltips
+{
+	Play,Play/Pause
+	Prev,Previous
+	Next,Next
+	Info,Information
+	Playlist,Playlist
+	Mini,Minimize
+	Maxi,Small
+	Maximax,Big
+	Close,Close
+}
+
+
+
+
+surface0 //The base, head and body
+{
+	collision0,138,7,241,55,Head
+	collision1,167,52,212,92,Face
+
+	element0,overlay,surface0.png
+	
+	//look to the side smile (kitty mouth :3)
+	0interval,never
+	0pattern0,100,0,overlay,0,0
+	0pattern1,0,0,stop,8
+	0pattern2,0,0,stop,1
+	0pattern3,0,0,stop,2
+	0pattern4,0,0,stop,3
+	0pattern5,0,0,stop,4
+	0pattern6,0,0,stop,5
+	0pattern7,0,0,stop,6
+	0pattern8,0,0,stop,7
+	0pattern9,100,1,overlay,0,0
+	
+	//look to the side smile (normal mouth :))
+	1interval,never
+	1pattern0,101,0,overlay,0,0
+	1pattern1,0,0,stop,8
+	1pattern2,0,0,stop,0
+	1pattern3,0,0,stop,2
+	1pattern4,0,0,stop,3
+	1pattern5,0,0,stop,4
+	1pattern6,0,0,stop,5
+	1pattern7,0,0,stop,6
+	1pattern8,0,0,stop,7
+	1pattern9,101,1,overlay,0,0
+	
+	//looking down, bored possibly. T.T
+	2interval,never
+	2pattern0,102,0,overlay,0,0
+	2pattern1,0,0,stop,8
+	2pattern2,0,0,stop,1
+	2pattern3,0,0,stop,0
+	2pattern4,0,0,stop,3
+	2pattern5,0,0,stop,4
+	2pattern6,0,0,stop,5
+	2pattern7,0,0,stop,6
+	2pattern8,0,0,stop,7
+	2pattern9,102,1,overlay,0,0
+	
+	//look to the side smile (kitty mouth :3) but with a thick eyeliner
+	3interval,never
+	3pattern0,103,0,overlay,0,0
+	3pattern1,0,0,stop,8
+	3pattern2,0,0,stop,1
+	3pattern3,0,0,stop,2
+	3pattern4,0,0,stop,0
+	3pattern5,0,0,stop,4
+	3pattern6,0,0,stop,5
+	3pattern7,0,0,stop,6
+	3pattern8,0,0,stop,7
+	3pattern9,103,1,overlay,0,0
+	
+	//Happy, eyes closed ^v^or (3
+	4interval,never
+	4pattern0,104,0,overlay,0,0
+	4pattern1,0,0,stop,8
+	4pattern2,0,0,stop,1
+	4pattern3,0,0,stop,2
+	4pattern4,0,0,stop,3
+	4pattern5,0,0,stop,0
+	4pattern6,0,0,stop,5
+	4pattern7,0,0,stop,6
+	4pattern8,0,0,stop,7
+	4pattern9,104,1,overlay,0,0
+	
+	//upset, dark eyes.
+	5interval,never
+	5pattern0,105,0,overlay,0,0
+	5pattern1,0,0,stop,8
+	5pattern2,0,0,stop,1
+	5pattern3,0,0,stop,2
+	5pattern4,0,0,stop,3
+	5pattern5,0,0,stop,4
+	5pattern6,0,0,stop,0
+	5pattern7,0,0,stop,6
+	5pattern8,0,0,stop,7
+	5pattern9,105,1,overlay,0,0
+	
+	//Normal face
+	6interval,runonce
+	6pattern0,106,0,overlay,0,0
+	6pattern1,0,0,stop,8
+	6pattern2,0,0,stop,1
+	6pattern3,0,0,stop,2
+	6pattern4,0,0,stop,3
+	6pattern5,0,0,stop,4
+	6pattern6,0,0,stop,5
+	6pattern7,0,0,stop,0
+	6pattern8,0,0,stop,7
+	6pattern9,106,1,overlay,0,0
+	
+	//Cute face :3
+	7interval,never
+	7pattern0,107,0,overlay,0,0
+	7pattern1,0,0,stop,8
+	7pattern2,0,0,stop,1
+	7pattern3,0,0,stop,2
+	7pattern4,0,0,stop,3
+	7pattern5,0,0,stop,4
+	7pattern6,0,0,stop,5
+	7pattern7,0,0,stop,6
+	7pattern8,0,0,stop,0
+	7pattern9,107,1,overlay,0,0
+	
+	//Eyes down, :3
+	8interval,never
+	8pattern0,108,0,overlay,0,0
+	8pattern1,0,0,stop,0
+	8pattern2,0,0,stop,1
+	8pattern3,0,0,stop,2
+	8pattern4,0,0,stop,3
+	8pattern5,0,0,stop,4
+	8pattern6,0,0,stop,5
+	8pattern7,0,0,stop,6
+	8pattern8,0,0,stop,7
+	8pattern9,108,1,overlay,0,0
+	
+	///Blink
+	15interval,random,4
+	15pattern0,-1,10,overlay,0,0
+	15pattern1,199,5,overlay,0,0
+	15pattern2,198,10,overlay,0,0
+	15pattern3,-1,3,overlay,0,0
+	
+	//Speaking
+	16interval,talk,4
+	16pattern0,0,0,alternativestart,[17.18.19]
+	
+	17interval,never
+	17pattern0,196,14,overlay,0,0
+	17pattern1,-1,10,overlay,0,0
+
+	18interval,never
+	18pattern0,197,14,overlay,0,0
+	18pattern1,-1,10,overlay,0,0
+	
+	19interval,never
+	19pattern0,197,10,overlay,0,0
+	19pattern1,196,13,overlay,0,0
+	19pattern2,-1,10,overlay,0,0
+	
+	///Arms intervals
+	
+	//200, right arm pointing to himself
+	20interval,never
+	20pattern0,200,0,overlay,0,0
+	20pattern1,0,0,stop,29
+	20pattern2,0,0,stop,21
+	20pattern3,0,0,stop,22
+	20pattern4,0,0,stop,23
+	20pattern5,0,0,stop,24
+	20pattern6,0,0,stop,25
+	20pattern7,0,0,stop,26
+	20pattern8,0,0,stop,27
+	20pattern9,0,0,stop,28
+	20pattern10,200,1,overlay,0,0
+	
+	//201, right arm up dramatically
+	21interval,never
+	21pattern0,201,0,overlay,0,0
+	21pattern1,0,0,stop,29
+	21pattern2,0,0,stop,20
+	21pattern3,0,0,stop,22
+	21pattern4,0,0,stop,23
+	21pattern5,0,0,stop,24
+	21pattern6,0,0,stop,25
+	21pattern7,0,0,stop,26
+	21pattern8,0,0,stop,27
+	21pattern9,0,0,stop,28
+	21pattern10,201,1,overlay,0,0
+	
+	
+	//202, doing his fingernails
+	22interval,never
+	22pattern0,202,0,overlay,0,0
+	22pattern1,0,0,stop,29
+	22pattern2,0,0,stop,21
+	22pattern3,0,0,stop,20
+	22pattern4,0,0,stop,23
+	22pattern5,0,0,stop,24
+	22pattern6,0,0,stop,25
+	22pattern7,0,0,stop,26
+	22pattern8,0,0,stop,27
+	22pattern9,0,0,stop,28
+	22pattern10,202,1,overlay,0,0
+	
+	//203, still doing his fingernails
+	23interval,never
+	23pattern0,203,0,overlay,0,0
+	23pattern1,0,0,stop,29
+	23pattern2,0,0,stop,21
+	23pattern3,0,0,stop,22
+	23pattern4,0,0,stop,20
+	23pattern5,0,0,stop,24
+	23pattern6,0,0,stop,25
+	23pattern7,0,0,stop,26
+	23pattern8,0,0,stop,27
+	23pattern9,0,0,stop,28
+	23pattern10,203,1,overlay,0,0
+	
+	
+	//204, right hand holding mic
+	24interval,never
+	24pattern0,204,0,overlay,0,0
+	24pattern1,0,0,stop,29
+	24pattern2,0,0,stop,21
+	24pattern3,0,0,stop,22
+	24pattern4,0,0,stop,23
+	24pattern5,0,0,stop,20
+	24pattern6,0,0,stop,25
+	24pattern7,0,0,stop,26
+	24pattern8,0,0,stop,27
+	24pattern9,0,0,stop,28
+	24pattern10,204,1,overlay,0,0
+	
+	
+	//205, left arm holding mic
+	25interval,never
+	25pattern0,200,0,overlay,0,0
+	25pattern1,0,0,stop,29
+	25pattern2,0,0,stop,21
+	25pattern3,0,0,stop,22
+	25pattern4,0,0,stop,23
+	25pattern5,0,0,stop,24
+	25pattern6,0,0,stop,20
+	25pattern7,0,0,stop,26
+	25pattern8,0,0,stop,27
+	25pattern9,0,0,stop,28
+	25pattern10,200,1,overlay,0,0
+	
+	
+	//206, both arms have 1 mic
+	26interval,never
+	26pattern0,206,0,overlay,0,0
+	26pattern1,0,0,stop,29
+	26pattern2,0,0,stop,21
+	26pattern3,0,0,stop,22
+	26pattern4,0,0,stop,23
+	26pattern5,0,0,stop,24
+	26pattern6,0,0,stop,25
+	26pattern7,0,0,stop,20
+	26pattern8,0,0,stop,27
+	26pattern9,0,0,stop,28
+	26pattern10,206,1,overlay,0,0
+	
+	//207, both arms holding 1 mic
+	27interval,never
+	27pattern0,207,0,overlay,0,0
+	27pattern1,0,0,stop,29
+	27pattern2,0,0,stop,21
+	27pattern3,0,0,stop,22
+	27pattern4,0,0,stop,23
+	27pattern5,0,0,stop,24
+	27pattern6,0,0,stop,25
+	27pattern7,0,0,stop,26
+	27pattern8,0,0,stop,20
+	27pattern9,0,0,stop,28
+	27pattern10,207,1,overlay,0,0
+	
+	
+	//208, arms out
+	28interval,never
+	28pattern0,208,0,overlay,0,0
+	28pattern1,0,0,stop,29
+	28pattern2,0,0,stop,21
+	28pattern3,0,0,stop,22
+	28pattern4,0,0,stop,23
+	28pattern5,0,0,stop,24
+	28pattern6,0,0,stop,25
+	28pattern7,0,0,stop,26
+	28pattern8,0,0,stop,27
+	28pattern9,0,0,stop,20
+	28pattern10,208,1,overlay,0,0
+	
+	
+	//209, arms down
+	29interval,runonce
+	29pattern0,209,0,overlay,0,0
+	29pattern1,0,0,stop,20
+	29pattern2,0,0,stop,21
+	29pattern3,0,0,stop,22
+	29pattern4,0,0,stop,23
+	29pattern5,0,0,stop,24
+	29pattern6,0,0,stop,25
+	29pattern7,0,0,stop,26
+	29pattern8,0,0,stop,27
+	29pattern9,0,0,stop,28
+	29pattern10,209,1,overlay,0,0
+
+
+	//300, standing normal
+	30interval,runonce
+	30pattern0,300,0,overlay,0,0
+	30pattern1,0,0,stop,31
+	30pattern2,0,0,stop,32
+	30pattern3,0,0,stop,34
+	30pattern4,0,0,stop,33
+	30pattern5,300,1,overlay,0,0
+	
+	//301, one leg up
+	31interval,never
+	31pattern0,301,0,overlay,0,0
+	31pattern1,0,0,stop,30
+	31pattern2,0,0,stop,32
+	31pattern3,0,0,stop,34
+	31pattern4,0,0,stop,33
+	31pattern5,301,1,overlay,0,0
+	
+	//302, both arms up, looks like he's jumping or something
+	32interval,never
+	32pattern0,302,0,overlay,0,0
+	32pattern1,0,0,stop,31
+	32pattern2,0,0,stop,30
+	32pattern3,0,0,stop,34
+	32pattern4,0,0,stop,33
+	32pattern5,302,1,overlay,0,0
+	
+	33interval,never
+	33pattern0,301,0,overlay,0,0
+	33pattern1,0,0,stop,30
+	33pattern2,0,0,stop,32
+	33pattern3,0,0,stop,34
+	33pattern4,0,0,stop,31
+	33pattern5,301,1,overlay,0,0
+	
+	34interval,never
+	34pattern0,301,0,overlay,0,0
+	34pattern1,0,0,stop,30
+	34pattern2,0,0,stop,32
+	34pattern3,0,0,stop,31
+	34pattern4,0,0,stop,33
+	34pattern5,301,1,overlay,0,0
+	
+	//Doing fingernails
+	40interval,never
+	40pattern0,0,0,start,41
+	40pattern1,0,0,stop,20
+	40pattern2,0,0,stop,21
+	40pattern3,0,0,stop,22
+	40pattern4,0,0,stop,23
+	40pattern5,0,0,stop,24
+	40pattern6,0,0,stop,25
+	40pattern7,0,0,stop,26
+	40pattern8,0,0,stop,27
+	40pattern9,0,0,stop,28
+	40pattern10,0,0,stop,29
+	40pattern11,0,0,start,42
+	40pattern12,0,0,stop,0
+	40pattern13,0,0,stop,1
+	40pattern14,0,0,stop,2
+	40pattern15,0,0,stop,3
+	40pattern16,0,0,stop,4
+	40pattern17,0,0,stop,5
+	40pattern18,0,0,stop,6
+	40pattern19,0,0,stop,7
+	40pattern20,0,0,stop,8
+	
+	41interval,never
+	41pattern0,202,0,overlay,0,0
+	41pattern1,203,20,overlay,0,0
+	41pattern2,202,10,overlay,0,0
+	41pattern3,203,50,overlay,0,0
+	41pattern4,202,10,overlay,0,0
+	41pattern5,203,40,overlay,0,0
+	41pattern6,202,20,overlay,0,0
+	41pattern13,0,0,start,41
+
+	42interval,never
+	42pattern0,102,0,overlay,0,0
+	42pattern1,108,200,overlay,0,0
+	42pattern2,102,300,overlay,0,0
+	42pattern3,108,100,overlay,0,0
+	42pattern4,102,300,overlay,0,0
+	42pattern5,108,200,overlay,0,0
+	42pattern6,102,300,overlay,0,0
+	42pattern7,0,0,start,42
+	
+	///Quiz
+	43interval,never
+	43pattern0,0,0,alternativestart,[44.45.46.47.48]
+	43pattern1,0,0,alternativestart,[49.50.51.52.53]
+	43pattern2,0,0,alternativestart,[54.55.56.57.58]
+	
+	///Arms
+	44interval,never
+	44pattern0,-1,30,overlay,0,0
+	44pattern1,0,0,alternativestart,[20.21.24.25.26.27]
+	44pattern2,0,0,start,43
+	
+	45interval,never
+	45pattern0,-1,100,overlay,0,0
+	45pattern1,0,0,alternativestart,[20.21.24.25.26.27]
+	45pattern2,0,0,start,43
+	
+	46interval,never
+	46pattern0,-1,200,overlay,0,0
+	46pattern1,0,0,alternativestart,[20.21.24.25.26.27]
+	46pattern3,0,0,start,43
+	
+	47interval,never
+	47pattern0,-1,300,overlay,0,0
+	47pattern1,0,0,alternativestart,[20.21.24.25.26.27]
+	47pattern2,0,0,start,43
+	
+	48interval,never
+	48pattern0,-1,400,overlay,0,0
+	48pattern1,0,0,alternativestart,[20.21.24.25.26.27]
+	48pattern2,0,0,start,43
+	
+	//legs
+	49interval,never
+	49pattern0,-1,30,overlay,0,0
+	49pattern1,0,0,alternativestart,[30.31.32.33.34]
+	49pattern2,0,0,start,43
+	
+	50interval,never
+	50pattern0,-1,100,overlay,0,0
+	50pattern1,0,0,alternativestart,[30.31.32.33.34]
+	50pattern2,0,0,start,43
+	
+	51interval,never
+	51pattern0,-1,200,overlay,0,0
+	51pattern1,0,0,alternativestart,[30.31.32.33.34]
+	51pattern3,0,0,start,43
+	
+	52interval,never
+	52pattern0,-1,300,overlay,0,0
+	52pattern1,0,0,alternativestart,[30.31.32.33.34]
+	52pattern2,0,0,start,43
+	
+	53interval,never
+	53pattern0,-1,400,overlay,0,0
+	53pattern1,0,0,alternativestart,[30.31.32.33.34]
+	53pattern2,0,0,start,43
+	
+	//Face
+	54interval,never
+	54pattern0,-1,30,overlay,0,0
+	54pattern1,0,0,alternativestart,[0.1.3.4.6.8]
+	54pattern2,0,0,start,43
+	
+	55interval,never
+	55pattern0,-1,100,overlay,0,0
+	55pattern1,0,0,alternativestart,[0.1.3.4.6.8]
+	55pattern2,0,0,start,43
+	
+	56interval,never
+	56pattern0,-1,200,overlay,0,0
+	56pattern1,0,0,alternativestart,[0.1.3.4.6.8]
+	56pattern3,0,0,start,43
+	
+	57interval,never
+	57pattern0,-1,300,overlay,0,0
+	57pattern1,0,0,alternativestart,[0.1.3.4.6.8]
+	57pattern2,0,0,start,43
+	
+	58interval,never
+	58pattern0,-1,400,overlay,0,0
+	58pattern1,0,0,alternativestart,[0.1.3.4.6.8]
+	58pattern2,0,0,start,43
+	
+
+}
+
+surface2
+{
+	collision0,114,118,141,140,Play
+	collision1,49,118,108,140,Prev
+	collision2,143,118,202,140,Next
+	collision3,20,118,43,140,Info
+	collision4,208,118,231,140,Playlist
+	collision5,193,9,205,21,Mini
+	collision6,211,9,223,21,Maxi
+	collision7,229,9,241,21,Close
+	element0,overlay,surface2.png,0,0
+	
+	100interval,never
+	100pattern0,9,0,overlay,0,0
+	100pattern1,0,0,stop,101
+	100pattern2,9,1,overlay,0,0
+	
+	101interval,never
+	101pattern0,2,0,overlay,0,0
+	101pattern1,0,0,stop,100
+	101pattern2,2,1,overlay,0,0
+	
+	//pattern1,-2,1,overlay,0,0
+	
+}
+
+surface5
+{
+	collision0,114,22,141,123,Play
+	collision1,49,22,108,123,Prev
+	collision2,143,22,202,123,Next
+	collision3,20,22,43,123,Info
+	collision4,208,22,231,123,Playlist
+	collision5,193,9,205,21,Mini
+	collision6,211,9,223,21,Maximax
+	collision7,229,9,241,21,Close
+	element0,overlay,surface5.png,0,0
+	
+	100interval,never
+	100pattern0,11,0,overlay,0,0
+	100pattern1,0,0,stop,101
+	100pattern2,11,1,overlay,0,0
+	
+	101interval,never
+	101pattern0,5,0,overlay,0,0
+	101pattern1,0,0,stop,100
+	101pattern2,5,1,overlay,0,0
+
+	
+	
+}
+
+surface8
+{
+	collision0,193,9,205,21,Maximax
+	collision1,211,9,223,21,Maxi
+	collision2,229,9,241,21,Close
+	element0,overlay,surface8.png,0,0
+}
+
