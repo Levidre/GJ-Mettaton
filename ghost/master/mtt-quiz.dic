@@ -1,0 +1,321 @@
+OnQuizSTART
+{
+    "\0\![enter,passivemode]* SO WE'RE HAVING A CHALLENGER ?\s[0]\i[43] \w7LET'S START THE SHOW !\w9\n\n[half]\x\![raise,OnChoseQuestion]"
+    normalquestion = 0
+    adventurequestion = 0
+    eastereggsquestion = 0
+    muffetquestion = 0
+    skelequestion = 0
+}
+
+OnChoseQuestion
+{
+	if normalquestion == 0 && adventurequestion == 0 && eastereggsquestion == 0 && muffetquestion == 0 && skelequestion == 0
+	{
+		"* FIRST QUESTION :"
+	}
+	elseif normalquestion == 1 && adventurequestion == 1 && eastereggsquestion == 1 && muffetquestion == 1 && skelequestion == 1
+	{
+		"\![leave,passivemode]\s[0]* AND IT SADLY THE END OF THIS SHOW.\w7 BUT NO WORRY, NEXT TIME MORE TENSE ! MORE SUSPENS ! MORE CHALLENGE !\e"
+	}
+	else
+	{
+		"* NEXT QUESTION :"
+	}
+	--
+	if normalquestion != 1
+	{
+		"\x\![raise,OnNormalquestion]"
+	}
+	if adventurequestion != 1
+	{
+		"\x\![raise,OnAdventurequestion]"
+	}
+	if eastereggsquestion != 1
+	{
+		"\x\![raise,OnEastereggsquestion]"
+	}
+	if muffetquestion != 1
+	{
+		"\x\![raise,OnMuffetquestion]"
+	}
+	if skelequestion != 1
+	{
+		"\x\![raise,OnSkelequestion]"
+	}
+	
+	
+}
+//Normal questions---------------------------------------------------------------------------------------------------------------------------------------------------------------
+OnNormalquestion
+{
+	"* WHAT IS YOUR FAVORITE CHARACTER?\n\n[half]\![*]\q[A) Sans,ansnormsans]       \![*]\q[B) A Dog,ansnormdog]\n\![*]\q[C) A Ghost,ansnormghost]    \![*]\q[D) Mew Mew,ansnormmew]"
+	"* WHICH CHARACTER HAS DETERMINATION?\n\n[half]\![*]\q[A) Papyrus,ansnormpaps]    \![*]\q[B) Alphys,ansnormalph]\n\![*]\q[C) Lesser Dog,ansnormless]    \![*]\q[D) Toriel,ansnormtori]"
+	normalquestion = 1
+}
+
+Select.ansnormpaps
+{
+	"\_v[succes_2.wav]* DETERMINED TO JOIN THE ROYAL GUARD,\w5 YES, \w5BUT NOT HE DOESN'T HAVE THE DETERMINATION A HUMAN HAS."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormalph
+{
+	"\_v[succes_2.wav]* ALPHYS?\w5 SHE IS THE ONE WITH THE LESS DETERMINATION."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormless
+{
+	"\_v[succes_2.wav]* HE IS CUTE BUT NOT DETERMINED."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormtori
+{
+	"\_v[succes_1.wav]* YES,\w5 OUR QUEEN HAD DETERMINATION.\w5 HER EYES WERE GLOWING BRAWN."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+Select.ansnormsans
+{
+	if punched >= 1
+	{
+		"\_v[succes_2.wav]* IT'S NOTHING ELSE THAN A LAZYBONE AND THE WEAKEST MONSTER IN THE UNDERGROUND."
+	}
+	else
+	{
+		"\_v[succes_2.wav]* IT SEEMS TO HAVE SOME ODD TASTES, \w5HOPEFULLY I WILL CAST A GOOD INFLUENCE ON YOU SOON ENOUGH!"
+	}
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormdog
+{
+	"\_v[succes_1.wav]* THIS DOG IS PRETTY STRANGE BUT IT SEEMS NICE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormghost
+{
+	"\_v[succes_1.wav]* YEAH ! \w7GHOSTS ARE THE BETTER MONSTERS IN THE UNDERGROUND."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansnormmew
+{
+	"\_v[succes_2.wav]* FROM ALPHYS POINT OF VIEW,\w5 MAYBE.\w7 BUT MEW MEW ISN'T A REAL PERSON YOU KNOW? \w7SO IT'S NOT A VALID RESPONSE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+//Adventure questions---------------------------------------------------------------------------------------------------------------------------------------------------------------
+OnAdventurequestion
+{
+	"* WHAT IS THERE IN A STATUE?\n\n[half]\![*]\q[A) A music box,ansadvbox]    \![*]\q[B) An artefact,ansadvitem]\n\![*]\q[C) An umbrella,ansadvumbr]    \![*]\q[D) A Dog,ansadvdog]"
+	"* WHAT DOES SANS DURING THE CONCERT WITH SHYREN?\n\n[half]\![*]\q[A) He is listening with Papyrus,ansadvlis]\n\![*]\q[B) He is playing trombone,ansadvtromb]\n\![*]\q[C) He isn't here,ansadvhere]\n\![*]\q[D) He is selling toilet paper tickets,ansadvtick]"
+	adventurequestion = 1
+}
+
+Select.ansadvlis
+{
+	"\_v[succes_2.wav]* NO,\w5 PAPYRUS WASN'T HERE,\w5 %(usernickname)"
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvtromb
+{
+	"\_v[succes_2.wav]* HE DIDN'T PLAY TROMBONE, \w5FOR ONCE. \w7HE PREFERS USING IT FOR DRAMATIC EFFECTS."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvhere
+{
+	"\_v[succes_2.wav]* HE WAS HERE,\w5 HE LIKES KNOWING WHAT HAPPEN."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvtick
+{
+	"\_v[succes_1.wav]* YES,\w5 HE DIDN'T FIND ANYTHING BETTER TO DO THAN SELLING TICKETS MADE OF TOILET PAPER."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+Select.ansadvbox
+{
+	"\_v[succes_1.wav]* TRUE,\w5 A NICE MELODY HEARABLE WITH AN UMBRELLA."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvitem
+{
+	"\_v[succes_2.wav]* TOO BAD THERE AREN'T ONE,\w5 SURE IT WOULD HAVE BEEN USEFUL FOR THE HUMAN."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvumbr
+{
+	"\_v[succes_2.wav]* THE UMBRELLA ARE IN A POT FOR PEOPLE TO WANT TO CROSS WATERFALL,\w5 NOT IN A STATUE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansadvdog
+{
+	"\_v[succes_2.wav]* I NEVER SAW HIM HIDDEN IN A STATUE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+//Easter eggs questions---------------------------------------------------------------------------------------------------------------------------------------------------------------
+OnEastereggsquestion
+{
+	"* FOR WHICH RESPONSABILITY AREN'T YOU READY ? \n\n[half]\![*]\q[A) Encounter Asgore,anseastas]    \n\![*]\q[B) Pick up the quiche,anseastquiche]\n\![*]\q[C) Help Alphys,anseastalph]    \n\![*]\q[D) Saving the Underground,anseastunder]"
+	"* WHAT IS THE NUMBER OF THE MISSING ENTRY IN THE LAB?\n\n[half]\![*]\q[A) 20,anseasttwen]    \![*]\q[B) 13,anseastthree]\n\![*]\q[C) 17,anseastsev]    \![*]\q[D) 11,anseastelev]"
+	eastereggsquestion = 1
+}
+
+Select.anseasttwen
+{
+	"\_v[succes_2.wav]* 20 IS A GOOD NAME,\w5 A FULL DOZEN. \w5BUT IT'S NOT THE RIGHT ANSWER."
+	--
+	"\x\![raise,OnChoseQuestion]"
+	
+}
+Select.anseastthree
+{
+	"\_v[succes_2.wav]* THE MOST SCARIER NUMBER.\w7 BUT IT'S A WRONG ANSWER"
+	--
+	"\x\![raise,OnChoseQuestion]"
+	
+}
+Select.anseastsev
+{
+	"* WHY THIS NUMBER?\w7 IF IT'S THE RIGHT ONE? \w7\_v[succes_1.wav]I GUESS THAT YES,\w5 I DON'T KNOW WHY THOUGH."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.anseastelev
+{
+	"\_v[succes_2.wav]* WHERE YOU SPEAKING ABOUT ME?\w7 I KNOW I'M FABULOUS BUT IT'S NOT THE GOOD ANSWER."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+Select.anseastas
+{
+	"\_v[succes_2.wav]* IS IT A RESPONSABILITY TO ENCOUNTER ASGORE?\w7 I DON'T THINK SO. \w7 IT'S MORE AN HONOR."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.anseastquiche
+{
+	"\_v[succes_1.wav]* DO YOU THINK HOLDING FOOD IS A BIG RESPONSABILITY?\w7 WELL, YOU'RE ALRIGHT,\w7 THE ABANDONNED QUICHE IS A BIG RESPONSABILITY."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.anseastalph
+{
+	"\_v[succes_2.wav]* BEING ALPHYS ASSISTANT ISN'T A BIG RESPONSABILITY. \w7SHE IS THE ONE WITH A RESPONSABILITY."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.anseastunder
+{
+	"\_v[succes_2.wav]* IT'S NOT YOU WHO HAVE THE RESPONSABILITY TO RIP YOUR SOUL OUT."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+//Muffet questions---------------------------------------------------------------------------------------------------------------------------------------------------------------
+OnMuffetquestion
+{
+	"* WHY WANT MUFFET MONEY?\n\n[half]\![*]\q[A) To rent a limousine,ansmulim]   \n\![*]\q[B) To help a friend,ansmufri]\n\![*]\q[C) To product more pastry,ansmupas]    \n\![*]\q[D) To build a house,ansmuho]"
+	muffetquestion = 1
+}
+
+Select.ansmulim
+{
+	"\_v[succes_1.wav]* IT'S A LITTLE BIT A RICH CONSIDERATION, ISN'IT? \w7BUT THAT'S THE GOOD ANSWER,\w5 IT'S TO SAVE SPIDERS FROM SNOWDIN COLD."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansmufri
+{
+	"\_v[succes_2.wav]* MUFFET DOESN'T WANT TO HELP A FRIEND,\w5 IT'S MORE THAN THAT."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansmupas
+{
+	"\_v[succes_2.wav]* NO, \w5SHE IS SELLING PASTRIES TO EARN MONEY, \w5NOT THE CONTRARY."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansmuho
+{
+	"\_v[succes_2.wav]* HER BOUNDARIE IS GOOD ENOUGH,\w5 SHE DOESN'T NEED TO BUILD A NEW HOUSE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+//Skeletons questions---------------------------------------------------------------------------------------------------------------------------------------------------------------
+OnSkelequestion
+{
+	"* ARE SKELETONS FUZZY?\n\n[half]\![*]\q[A) Of course,ansskelefuzyes]    \![*]\q[B)...No,ansskelefuzno]\n\![*]\q[C) Never touch one,ansskelefuztou]    \![*]\q[D)...Maybe?,ansskelefuzmay]"
+	"* WHY IS PAPYRUS A GOOD HOST?\n\n[half]\![*]\q[A) Spaghettis,ansskelespag]    \n\![*]\q[B) He follows the guest,ansskelefol]\n\![*]\q[C) He is great,ansskelegreat]    \n\![*]\q[D) He is made of bones,ansskelebone]"
+	skelequestion = 1
+}
+
+Select.ansskelespag
+{
+	"\_v[succes_2.wav]* EDIBLE SPAGHETTIS DON'T MAKE SOMEBODY A GOOD HOST."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelfol
+{
+	"\_v[succes_1.wav]* YEAH, \w5HE RUN PRETTY FAST TO STAY WITH HIS GUEST.\w7 IT'S VERY IMPORTANT TO NEVER LET THE GUEST ALONE,\w5 IT'S LIKE AN AUDIANCE,\w5 THEY MUST BE NURTURED."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelegreat
+{
+	"\_v[succes_2.wav]* BEING GREAT DOESN'T MAKE SOMEONE A GOOD HOST."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelebone
+{
+	"\_v[succes_2.wav]* IF BONES WERE MAKING PEOPLE GOOD HOSTS, \w5HUMANS WOULD BE WONDERFUL ONES. \w7BUT WE'RE HAVING THE EVIDENCE THEY AREN'T,\w5 IN THE CONTRARY,\w5 WE WOULDN'T BE STILL TRAPPED."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+
+Select.ansskelefuzyes
+{
+	"\_v[succes_2.wav]* DID YOU EVER SUCCESFULY FUZZ A SKELETON?"
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelefuzno
+{
+	"\_v[succes_2.wav]* AND HOW CAN YOU BE SO SURE OF YOURSELF?"
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelefuztou
+{
+	"\_v[succes_2.wav]* OH?\w7 SO YOU DON'T NOW THE ANSWER? \w7YOU MUST BE NEW HERE."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+Select.ansskelefuzmay
+{
+	"\_v[succes_1.wav]* AND THAT'S THE RIGHT ANSWER.\w7 SKELETONS ARE SO MYSTERIOUS."
+	--
+	"\x\![raise,OnChoseQuestion]"
+}
+

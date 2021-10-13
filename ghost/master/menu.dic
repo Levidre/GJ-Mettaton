@@ -1,0 +1,788 @@
+﻿//---------------------------Menus--------------------------
+
+//--OpenSakuraMenu
+
+OpenSakuraMenu
+{
+		"\0\b2* WHAT DO YOU WANT %(usernickname)?"
+		"\0\b2* YOU NEED SOMETHING?"
+		"\0\b2* WHAT IS IT YOU NEED DARLING?"
+		"\0\b2* HMM?"
+		"\0\b2* YES %(usernickname)"
+		"\0\b2* YES DARLING?"
+		"\0\s[0]\b2* YES FABULOUS?\n\n"
+
+		--
+		MenuRun
+}
+
+//--MenuRun
+
+MenuRun
+ {	
+ 	wd = GetWeekDay
+ 	ap = GetAP
+ 	nowmin = Getnowmin
+ 	nowhour = Getnowhour
+	--
+	"\n\n\_q\b2" 
+	--
+	if lastTalk != ""
+	{
+	  "\![*]\q[* SAY IT AGAIN,OnLastTalk]\n\n[half]"
+	}
+	--
+		"\![*]\q[* TELL ME SOMETHING,altalk]\n\n[half]"
+	--
+		"\![*]\q[SING,Musicmenu]    \![*]\q[QUIZ,startquiz]\n"
+	--
+		"\![*]\q[ACT,act]    \![*]\q[ITEM,item]"
+	--
+		"\n\n[half]"
+		--
+	if displaytest == 1
+	{
+		"\n[half]* (The test functions and some useful things)\n\n[half]"
+		--
+		"\![*]\q[Call the test function,testfunction]\n"
+		--
+		"\![*]\q[Call the second test function,othertestfunction]\n"
+		--
+		"\![*]\q[Display some variables,displayvariables]\n"
+		--
+		"\![*]\q[Reinitilize some variables,reinivariables]\n"
+	}
+	--
+	"\![*]\q[Config Menu,configmenu]\n/
+	\![*]\q[Functions,dosomething]\n\n[half]/
+ 	\![*]\q[Nevermind,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
+}
+
+Select.act
+{
+	"* (What do you want to do?)\_q\n\n[half]"
+	--
+	"\![*]\q[Tell him he looks nice,looksnice]\n\n"
+	--
+	"\![*]\q[Hum a song,hum]\n\n"
+	--
+	"\![*]\q[Pet him,pet]"
+}
+
+Select.looksnice
+{
+	useaffection += 5
+	"\i[4]\i[28]\i[30]* WHAT A NICE THING TO SAY!\e"
+	
+	"\i[4]\i[28]\i[30]* THANK YOU %(usernickname), I'M QUITE PROUD OF MY APPEARENCE!\e"
+}
+
+Select.hum
+{
+	useaffection += 2
+	"* (You start humming ''Death By Glamour'')\n\n\w8\i[43]* (He starts dancing.\w8 He doesnt look like he's gonna stop any time soon...)\e"
+	
+	"* (You start humming)\n\n\w8\i[6]\i[24]\i[31]* (He starts humming with you.)\e"
+}
+
+Select.pet
+{
+	"* (You reach over to pet his head, but for some reason you cant.)\n\n\w8* IF YOU WANT TO TOUCH MY HAIR YOU SHOULD MOVE YOUR MOUSE OVER IT INSTEAD!"
+}
+
+Select.item
+{
+	"* (What do you want to give him?)\_q\n\n[half]"
+	--
+	"\![*]\q[A costume,costume]\n\n"
+	--
+	"\![*]\q[Something,something]\n\n"
+	--
+	"\![*]\q[A hug,hug]\n\n"
+}
+
+Select.costume
+{
+	useaffection += 5
+	"\i[4]\i[28]\i[30]WHAT A WONDERFUL GIFT!\e"
+	
+	"\i[4]\i[28]\i[30]I RECOGNIZE THIS FROM ONE OF MY OLD SHOWS!\e"
+	
+	"\i[4]\i[28]\i[30]WHAT A BEAUTIFUL COSTUME!\e"
+}
+
+Select.something
+{
+	useaffection += 10
+	"\i[4]\i[28]\i[30]* HOW THOUGHTFUL OF YOU!\e"
+}
+
+Select.hug
+{
+	useaffection += 7
+	"\i[4]\i[28]\i[30]* HOW SWEET!\e"
+	
+	"\i[4]\i[28]\i[30]* AWW, YOU'RE SUCH A %(usernickname)!\e"
+	
+	"\i[4]\i[28]\i[30]* THANK YOU FOR YOUR AFFECTION!\e"
+}
+
+Select.startquiz
+{
+    OnQuizSTART
+}
+
+///The tests functions------------------------------------------------------------------------------------------------------------------------------
+Select.testfunction
+{
+	OnShootStart
+}
+truc
+ {    
+     wd = GetWeekDay
+     ap = GetAP
+     nowmin = Getnowmin
+     nowhour = Getnowhour
+    --
+    "\n\n\_q\b2"
+    --
+    if lastTalk != "" 
+    {
+      "\![*]\q[Repeat yourself,OnLastTalk]\n\n[half]"
+    }
+    --
+     "\![*]\q[Say something,altalk]\n"
+    "\![*]\q[Talk,altalk]\n"
+    --
+    "\![*]\q[Config Menu,configmenu]\n/
+    \![*]\q[Functions,dosomething]\n\n[half]/
+    \![*]\q[Hey Juan,JuanInteract]\n/
+     \![*]\q[Nevermind,CANCEL]\n\n[half]\_l[160,185]%(juanheart) %(wd) %(nowhour):%(nowmin) %(ap),  %(month)/%(day)/%(year)\e"
+}
+
+Select.othertestfunction
+{
+	
+}
+Select.displayvariables
+{
+	battlestatsize = ARRAYSIZE(battlestat)
+	--
+	--
+	"* For now I display "
+	--
+	""
+	--
+	//"\n* But you can display what you want, like variables brought from other ghosts or the variables used by some functions."
+	--
+	SAVEVAR
+	--
+	"\e"
+	
+}
+
+//It would reinitialize some variables then display the menu.
+Select.reinivariables
+{
+	sleepingtime = 3
+	azpunched = 0
+	--
+	MenuRun
+}
+//Leave this next bit alone.
+Select.altalk
+{
+	AiTalk
+}
+
+//Leave this alone
+OnLastTalk 
+{
+"%(lastTalk)\e"
+}
+
+//This is figuring out what day of the week it is. Leave it alone.
+GetWeekDay
+{
+	if weekday == 0
+	{"Sun"}
+	elseif weekday == 1
+	{"Mon"}
+	elseif weekday == 2
+	{"Tue"}
+	elseif weekday == 3
+	{"Wed"}
+	elseif weekday == 4
+	{"Thu"}
+	elseif weekday == 5
+	{"Fri"}
+	else
+	{"Sat"}
+}
+
+//This is finding out whether it's AM or PM. Leave it alone.
+GetAP
+{
+ 	if hour >= 0 && hour <= 11
+ 		{
+ 			"AM"
+ 		}
+ 	else
+ 		{
+ 			"PM"
+ 		}
+}
+
+//This is figuring out the minute. Leave it alone.
+Getnowmin
+{
+	if minute >= 0 && minute <=9
+		{
+			"0%(minute)"
+		}
+	else
+		{
+			"%(minute)"
+		}
+}
+
+//This is figuring out the hour. Leave it alone.
+Getnowhour
+{
+	if hour12 >= 0 && hour12 <=9
+		{
+			"0%(hour12)"
+		}
+	else
+		{
+			"%(hour12)"
+		}
+}
+
+//If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
+
+Select.BACKTOMENU
+	{
+		MenuRun
+	}
+
+//If someone selects configmenu, this will lead to TalkConfig.
+Select.configmenu
+	{
+		TalkConfig
+	}
+
+//--TalkConfig
+
+TalkConfig
+{
+	"\0\b[2]\_q\" 
+	--
+	"f[bold,1]YOUR NAME:\f[bold,0] %(username) \f[sup,1](\q[Change it?,TEACHNAME])\f[sup,0]\n"
+	--
+	"\f[bold,1]YOUR PRONOUNES:\f[bold,0] %(heshe)/%(himher)/%(hisher) \f[sup,1](\q[Change them?,TEACHPRONOUN])\f[sup,0]\n"
+	--
+	"\f[bold,1]YOUR BIRTHDATE:\f[bold,0] %(birthdayprint) \f[sup,1](\q[Change it?,TEACHBDAY])\f[sup,0]\n\n"
+	--
+	"\f[bold,1]Talk Rate:\f[bold,0] - every %(talktime) \f[sup,1](\q[Change it,talkinter])\f[sup,0]\n\n"
+	--
+	"\![*]\q[Enable the tests,enabletest]\n\n[half]"
+	--		
+		{
+		"\![*]Enable Uninstall? (NOW : %(deleteshitai))\n\q[ON,deleteon] \q[OFF,deleteoff]\n\n[half]\n"
+		}
+	--
+	"\![*]\q[Back to the menu,BACKTOMENU]\e"
+}
+
+Select.enabletest
+{
+	if displaytest == 1
+	{
+		"\0* THE TESTS WOULDN'T SHOW UP."
+		--
+		displaytest = 0
+	}
+	else
+	{
+		"\0* THE TESTS WOULD BE DISPLAYED."
+		displaytest = 1
+	}
+	--
+	"\e"
+}
+
+//This and the next few set up the pronouns, as you can see by the linkedfunction names. You can replace "\0\s[0]What pronouns do you want?" with your own dialogue if you prefer, but leave the rest of it alone.
+
+Select.TEACHPRONOUN
+{
+	"\0\s[0]What pronouns do you want?\w5\n\n[half]\_q/
+		\![*]\q[He-His-Him,choicemasc]\n/
+		\![*]\q[She-Her-Her,choicefem]\n/	
+		\![*]\q[They-Their-Them,choiceneither]\e"
+}
+
+Select.choicemasc
+{
+	presuffix = "masculine"
+	himher = "him"
+	heshe = "he"
+	hisher = "his"
+	--
+	"\0\s[0]* I'LL CALL YOU HE FROM NOW ON.\e"
+	//Leave the part above the double dashes alone. You can replace the snip of dialogue however with whatever you like.
+}
+
+Select.choicefem
+{
+	presuffix = "feminine"
+	himher = "her"
+	heshe = "she"
+	hisher = "her"
+	--
+	"\0\s[0]* I'LL CALL YOU SHE FROM NOW ON.\e"
+	//as above, you can also replace this dialogue.
+}
+
+Select.choiceneither
+{
+	presuffix = "undefine"
+	himher = "them"
+	heshe = "they"
+	hisher = "their"
+	--
+	"\0\s[0]I'LL CALL YOU THEM FROM NOW ON\e"
+	//and this one.
+}
+
+
+//These two options toggle whether or not you can delete your ghost. Leave them alone.
+
+Select.deleteon
+{
+	deleteshitai = "ON"
+	TalkConfig
+}
+
+Select.deleteoff
+{
+	deleteshitai = "OFF"
+	TalkConfig
+}
+
+
+//This next set of functions handles inputting the user's birthday.
+
+Select.TEACHBDAY
+	{
+		dayslot = GetDaySlot
+		
+		"\0\s[0]* AND WHAT BEAUTIFUL MONTH WERE YOU BORN IN DEAREST?\![open,inputbox,OnUserBornMonth,-1]\e"
+	}
+
+//--OnUserBornMonth
+//This takes the value that the user put into the input box above and evaluates it.
+
+OnUserBornMonth
+	{
+		_tempmonth = reference0 //this stores what the user input in as a variable called _tempmonth
+		if _tempmonth >= 1 && _tempmonth <= 12 //if the month is a valid month
+			{
+			bornmonth = _tempmonth
+			bornmonthprint = Printmonth
+			
+			"\0\s[0]* WHAT A NICE MOTNH %(bornmonthprint) IS.\n\n\w8NOW TELL ME, WHAT WAS THE DAY?\![open,inputbox,OnUserBornDay,-1]\e"
+			}
+		else
+			{
+			"\0\s[0]IT SEEMS YOU'VE MISTYPED, TRY AGAIN!\![open,inputbox,OnUserBornMonth,-1]\e"
+			}
+	}
+
+//This puts the name to the number of the month. No need to mess with these.
+Printmonth
+{
+	if bornmonth == 1
+	{
+		"JANUARY"
+	}
+	elseif bornmonth == 2
+	{
+		"FEBUARY"
+	}
+	elseif bornmonth == 3
+	{
+		"MARCH"
+	}
+	elseif bornmonth == 4
+	{
+		"APRIL"
+	}
+	elseif bornmonth == 5
+	{
+		"MAY"
+	}
+	elseif bornmonth == 6
+	{
+		"JUNE"
+	}
+	elseif bornmonth == 7
+	{
+		"JULY"
+	}
+	elseif bornmonth == 8
+	{
+		"AUGUST"
+	}
+	elseif bornmonth == 9
+	{
+		"SEPTEMBER"
+	}
+	elseif bornmonth == 10
+	{
+		"OCTOBER"
+	}
+	elseif bornmonth == 11
+	{
+		"NOVEMBER"
+	}
+	else
+	{
+		"DECEMBER"
+	}
+}
+
+//This adds an appropriate suffix to the number for the day. No need to mess with this either.
+
+Printday
+{
+	if bornday == 1 || bornday == 21 || bornday == 31
+	{
+	"%(bornday)ST"
+	}
+	elseif bornday == 2 || bornday == 22
+	{
+	"%(bornday)ND"
+	}
+	elseif bornday == 3 || bornday == 23
+	{
+	"%(bornday)RD"
+	}
+	else
+	{
+	"%(bornday)TH"
+	}
+}	
+
+//--OnUserBornDay
+//This is much like the above function OnUserBornMonth. It'll take the value the user put in for the day and analyze it.
+
+OnUserBornDay
+{
+	tempday = reference0 //storing the input in tempday
+	
+	if bornmonth == 1 || bornmonth == 3 || bornmonth == 5 || bornmonth == 7 || bornmonth == 8 || bornmonth == 10 || bornmonth == 12 //This is checking to see if it's one of the months with 31 days.
+		{
+			if tempday >= 1 && tempday <= 31 //if it falls in the right range
+				{
+					bornday = tempday
+					borndayprint = Printday
+					userbirthday = "%(bornmonth)month %(bornday)day"
+					birthdayprint = "%(bornmonthprint) %(borndayprint)"
+					
+					"%(birthchecked)"
+					//Mostly defining envelopes and values in here. No need to touch any of this! Eagle-eyed readers will notice the new envelope birthchecked on its own line like a tiny king. We'll get to that momentarily, but pay it no mind for now.
+				}
+			else //if the day isn't valid, like the 10046th or something.
+				{
+					"\0\s[0]INCORRECT!\w8 THAT DAY DOESNT EXIST, TRY AGAIN DEARIE!\![open,inputbox,OnUserBornDay,-1]\e"
+					
+					//Similar as you can see to the month check above. You can replace the dialogue here up to the tag as you just did, but make sure to leave the input box tag so the user can put in a correct day.
+				}
+		}
+	elseif bornmonth == 2 //if the month is february
+		{
+			if tempday >= 1 && tempday <= 29 //and the day falls in the right range
+				{
+					bornday = tempday
+					borndayprint = Printday
+					userbirthday = "%(bornmonth)month %(bornday)day"
+					birthdayprint = "%(bornmonthprint) %(borndayprint)"
+					
+					"%(birthchecked)"
+					//just as with the above.
+				}
+			else
+				{
+					"\0\s[0]INCORRECT!\w8 THAT DAY DOESNT EXIST, TRY AGAIN DEARIE!\![open,inputbox,OnUserBornDay,-1]\e"					
+					//And the same as above again! You see the pattern here?
+				}
+		}
+	else //if it's any other month than those
+		{
+			if tempday >= 1 && tempday <= 30 //if the day falls between these values
+				{
+					bornday = tempday
+					borndayprint = Printday
+					userbirthday = "%(bornmonth)MONTH %(bornday)DAY"
+					birthdayprint = "%(bornmonthprint) %(borndayprint)"
+					
+					"%(birthchecked)"
+				}
+			else
+				{
+					"\0\s[0]INCORRECT!\w8 THAT DAY DOESNT EXIST, TRY AGAIN DEARIE!\![open,inputbox,OnUserBornDay,-1]\e"
+				}
+		}		
+}
+
+//--birthchecked
+
+birthchecked
+{
+	if userbirthday == dayslot //if today is the user's birthday
+		{
+			"\0\s[0]%(usernickname),\W5 IT SEEMS TO BE YOUR BIRTHDAY.\W8 I'D LIKE TO DEDICATE THIS DAY TO YOU, %(username).\e"
+		}
+	else 
+		{
+			"\0\s[0]SO YOU'RE BIRTHDAY IS %(bornmonthprint) %(borndayprint)?\W8 I'LL MAKE SURE TO REMEMBER!\e"
+			//note the use of envelopes to display the newly set birthday properly. You can replace this dialogue as well, and you can use %(bornmonthprint) and %(borndayprint) to display the month and day in the new dialogue, if you want.
+		}
+}
+
+//--Talk Rate
+//This is when the user chooses to adjust the talk rate in the config menu. The talk rate is how often the ghost will read some dialogue from aitalk.dic.
+
+Select.talkinter
+ 	{
+ 		"\0\s[0]\b2* HOW OFTEN WOULD OYU LIKE TO HEAR ME TALK? CURRENTLY, I TALK %(talktime)./
+		//note the new envelope here for %(talktime). You'll see it again in a second. You can replace the dialogue above with whatever you like, just make sure it ends with ./ and not \e.
+ 		\0\n\n[half]/
+ 		\![*]\q[* EVERY 30 SECONDS,TALKMAX]\n/
+		\![*]\q[* EVERY MINUTE,TALKHIGH]\n/
+ 		\![*]\q[* EVERY 3 MINUTES,TALKNORMAL]\n/
+		\![*]\q[* EVERY 5 MINUTES,TALKPOOR]\n/
+ 		\![*]\q[* DON'T SPEAK,TALKNONE]\n\n[half]/
+		\![*]\q[* STAY THE SAME,TalksTill]\e"
+	}
+
+//If the user doesn't want to change the rate. You can change all of the dialogue in any of these options if you want to reflect the choice the user made. You TECHNICALLY could also change the value in talktime to reflect some other way of measuring time but I would NOT recommend it, it'd just be confusing I'm sure.
+Select.TalksTill
+	{
+		"\0\s[0]* NO CHANGES THEN!\e"
+	}
+
+//If the user chooses every 30 seconds.
+Select.TALKMAX
+	{
+ 		talktime = "30 SECONDS" //this sets up the envelope properly
+		aitalkinterval = 45 //this changes the actual rate
+		
+ 		"\0\s[0]* I CAN KEEP UP THE PACE, CAN YOU?\e"
+	}
+
+//If the user chooses every minute.
+Select.TALKHIGH
+	{
+ 		talktime = "MINUTE"
+		aitalkinterval = 90
+		
+ 		"\0\s[0]* I'LL TALK EVERY MINUTE THEN.\e"
+	}
+
+//If the user chooses every three minutes.
+Select.TALKNORMAL
+	{
+ 		talktime = "3 minutes"
+		aitalkinterval = 270
+		
+ 		"\0\s[0]* I'LL TALK EVERT 3 MINUTES THEN.\e"
+	}
+
+//If the user chooses every five minutes. This is the default rate the ghost will start up in, as seen in bootend.dic.
+Select.TALKPOOR
+	{
+ 		talktime = "5 minutes"
+		aitalkinterval = 400
+		
+ 		"\1\s[10]* I'LL TALK EVERT 5 MINUTES.\e"
+	}
+
+//If the user chooses to not have them speak. This is one case where you MIGHT want to make talktime equal something else, if you have a snappier way of saying the ghost won't talk. Make sure it flows well in your menus though, since it will be displayed in your config menu.
+Select.TALKNONE
+	{
+ 		talktime = "* NO TALKING?\w8 HOW BORING."
+		aitalkinterval = 0
+		
+		"\0\s[0]* YOU DONT WANT TO HEAR ME TALK?\e"
+	}
+
+	
+//This is when the user chooses to change their name. It's linked to the functions outlined in nameteach.dic. Nothing to touch here.
+Select.TEACHNAME
+	{
+		OnTeachName	
+	}
+
+	
+//If the user selects cancel in a menu. Replace as you like, or just leave them blank.
+Select.CANCEL
+	{
+		"\0\s[0]* ALRIGHT THEN!\e"
+		
+		"\0\s[0]* JUST TELL ME IF YOU NEED SOMETHING!\e"
+ 	}
+
+	
+//Going back to the MenuRun function we finished above, this is if someone selects the Functions option, linked to dosomething. As you can see, it ends up as Select.dosomething.
+
+Select.dosomething
+{
+ 		"\0\s[0]\b2* WHAT DO YOU NEED ME TO DO %(usernickname).\n\n"
+ 		"\0\s[0]\b2* WHAT DO YOU NEED DARLING?\n\n"
+		"\0\s[0]\b2* YES FABULOUS?\n\n"
+		
+		//I mentioned this above in MenuRun, but you can have a set of multiple different responses that may randomly appear when the menu is opened if you offset them from the rest with the -- dashes below this note. Try opening this menu yourself with the template to see how it works. The character will randomly choose one line as the intro. 
+		//If you don't want to deal with this, just delete the extra lines and leave one. Otherwise, replace the dialogue above as you like, but note that they don't end with \e here. You can leave the rest of this below alone.
+		--
+ 		"\![*]\q[Open Calendar,CALENDAR]\n/
+		\![*]\q[Check Email,MailCheck]\n/
+		\![*]\q[Open SSP Preferences,sspconfig]\n/
+		\![*]\q[Empty Recycle Bin,ChoiceGarbagecan]\n/
+		\![*]\q[System Information,ChoiceSystemInformation]\n/
+		\![*]\q[Update information,AfterUpdate]\n\n/
+ 		\![*]\q[Back to main menu,BACKTOMENU]\e"
+}
+
+//When the user clicks Open Calender. This will open the calender function of SSP, an in-built feature that you don't have to worry about in the least.
+Select.CALENDAR
+{
+	"\0\s[0]OPENING THE CALENDER!\![open,calendar]\e"
+	
+	//You can replace the dialogue here up to the \!.
+	//Advanced users, can you break it down yet? It's basically just using \! to open calender.exe or dll or whatever SSP uses to make it happen.
+}
+
+//When the user chooses SSP preferences. This will open the same window that shows up if you right click your ghost and go to Utilities - Preferences.
+Select.sspconfig
+{
+	"\0\s[0]OPENING THE SSP CONFIG MENU!\![open,configurationdialog]\e"
+	
+	//Again, you can replace up to the \! tag.
+}
+
+//If the user chooses to empty the recycle bin.
+Select.ChoiceGarbagecan
+{
+	_gomicheck = FUNCTIONEX("gomi.dll", "-n")	
+	
+	if _gomicheck == 0 //If the recycle bin is empty.
+	{
+		"\0\s[0]I'LL GO CHECK IT FOR YOU, %(usernickname)!\w8\w8\s[-1]\w8\w8\w8\w8\w8\0\s[0]\cIT WAS EMPTY.\e"
+	}
+	elseif _gomicheck >= 1 //If the recycle bin is full.
+	{
+		"\0\s[0]ALRIGHT %(usernickname)!\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[0]\cDONE!\e"
+		
+		"\0\s[0]TIME TO TAKE OUT THE TRASH!\w8\w8\s[-1]\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[0]\cFINISHED!\e"
+	}
+}
+
+
+//This is for the SAORI, don't touch it.
+OnGarbagecanEmpty
+{
+	_gomi = FUNCTIONEX("gomi.dll", "-f")
+}
+
+//This is when the user chooses System Information. Don't touch any of this either. For those curious though, note that this is done using another SAORI, this time saori_cpuid.dll.
+Select.ChoiceSystemInformation
+{
+	os_name = FUNCTIONEX("saori_cpuid.dll","os.name")
+	os_version = FUNCTIONEX("saori_cpuid.dll","os.version")
+	cpu_name = FUNCTIONEX("saori_cpuid.dll","cpu.name")
+	cpu_clockex = FUNCTIONEX("saori_cpuid.dll","cpu.clockex")
+	"/
+	\0\s[0]\b[2]/
+	\_q\f[bold,1]OS:\f[bold,0] %(os_name) %(os_version)\n/
+	\f[bold,1]Memory Load:\f[bold,0] %(memoryload)%\n/
+	\f[bold,1]Physical Memory:\f[bold,0] %(memoryavailphys) KB\n/
+	\f[bold,1]CPU:\f[bold,0] %(cpu_name) %(cpu_clockex)MHz\n/
+	\f[bold,1]Ukagaka:\f[bold,0] %property[baseware.version]/
+	\e"
+}
+	
+//This is when the user chooses to check their email. The rest of this function plays out in etc.dic. You can leave this alone.
+Select.MailCheck
+	{
+		"\![biff]\e"
+	}
+
+
+//This is when the user ends their headline session. Headlines are detailed more in etc.dic. Replace dialogue with what strikes you.
+Select.HEADLINECANCEL
+ 	{
+ 		"\0\s[0]* FINISHED WITH THE HEADLINES!\e"
+	}
+
+	
+//---- OnChoiceTimeout ---------------------------------------------------------
+//If the user is given a menu with choices, but doesn't pick one of the choices, it will eventually time out. At that point, they will say this dialogue. Replace with whatever you like, or leave it blank.
+
+OnChoiceTimeout
+ {
+	"\0\s[0]* WE CAN'T KEEP THE AUDIENCE WAITING, %(usernickname).\e"
+ }
+
+ 
+//---- Secondary Character Menu ---------------------------------------------------------
+//This section has to do with the menu for the second character. If you don't want your second character to have a menu, you can just delete this whole chunk.
+
+OpenKeroMenu
+ {
+	 /*
+	"\1\s[10]\b[2]"
+	"\1\s[15]\b[2]"
+	"\1\s[16]\b[2]"
+	
+	//You've seen so far that you can set up multiple options for menu introductions. You can also set up multiple poses to match up to multiple dialogue. So for example, when you open Triangle's menu, he may randomly do any of these three poses, and randomly choose from any of the four dialogue options below, before continuing with his menu. Make a close note of the -- dashes breaking these up.
+ 	--
+	"This is a menu introduction dialogue."
+ 	"This is another menu introduction dialogue."
+ 	"This is the third menu introduction dialogue."
+ 	"This is the fourth menu introduction dialogue."
+ 	--
+	"\n\n[half]/
+	\![*]\q[Update,keroupdatecheck]\n/
+ 	\![*]\q[Bug report,bugreport]\n\n/
+	\![*]\q[Test variable,testvariable]\n\n/
+	//When you are done with the test variable, aka your ghost is finished or you just don't want it showing up when you publish your ghost beta or whatevs, simply add two // slashes in front of \![*] to comment the line out. In Notepad++, it will turn green. When you want to use it again, erase the two slashes to turn it back to normal.
+	\![*]\q[Nothing,keroCANCEL]\e"
+	*/
+}
+
+Select.keroCANCEL
+{
+	"\1\s[10]This is menu cancel dialogue.\e"
+}
+
+
+//This is when they select bug report. This is mostly meant to briefly give the user information about you, the creator, and how to report a problem to you. This can be handy if the person forgot where they got their ghost or how to contact you. Add whatever info you like here.
+Select.bugreport
+{
+"\1\s[10]This is the bug report dialogue. \w5Report bugs to youremailaddress@emailprovider.com. \w5We were downloaded from \_a[http://www.whereveryoupostedthem.com/]some place\_a.\e"
+}
+
+//When clicked, this will automatically tell the ghost to check for updates. More detail on updates in etc.dic. You can leave this alone.
+Select.keroupdatecheck
+{
+	"\1\s[10]\![updatebymyself]\e"
+}
+
+//--Test Variable --------------------------------------------------------
+
+Select.testvariable
+{
+	"\1\s[10]Testing!\e"
+}
